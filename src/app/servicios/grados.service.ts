@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Grado } from '../modelos/grado';
 
+import { environment } from './../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class GradosService {
-  public url: string = "http://localhost:8080/grado";
+  public url: string = environment.apiUrl + "grado";
 
   constructor(private httpClient: HttpClient) {}
 

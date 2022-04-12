@@ -17,7 +17,7 @@ export class ProfesorComponent implements OnInit {
   // VARIABLES PERTENECIENTES AL MODELO
   public nombre: string = "";
   public apellidos: string = "";
-  public genero: string = "Selecciona una opción...";
+  public genero: string = "";
 
   constructor(
     private profesorService: ProfesoresService

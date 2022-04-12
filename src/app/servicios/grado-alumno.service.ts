@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GradoAlumno } from '../modelos/grado-alumno';
 
+import { environment } from './../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class GradoAlumnoService {
 
-  public url: string = "http://localhost:8080/alumno-grado";
+  public url: string = environment.apiUrl + "alumno-grado";
 
   constructor(private httpClient: HttpClient) {}
 
