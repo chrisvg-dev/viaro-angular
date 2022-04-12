@@ -1,0 +1,17 @@
+.card {
+    margin-left: 10px;
+    box-shadow: 1px 1px 1px lightgray;
+}
+.card:hover {
+    background: #fbf9f9;
+    box-shadow: 2px 2px 2px lightgray;
+}
+
+.card a {
+    text-decoration: none;
+    color: black;
+}
+.card img {
+    width: 150px;
+    margin-bottom: 10px;;
+}

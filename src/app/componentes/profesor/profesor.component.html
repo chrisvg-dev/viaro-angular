@@ -1,0 +1,52 @@
+<div class="mt-4">
+    <h2>Administración de profesores</h2>
+    <form #formProfesores="ngForm" novalidate (ngSubmit)="saveOrUpdate()">
+        <input 
+            type="text" 
+            name="nombre" 
+            required 
+            class="form-control"
+            placeholder="Ingresa el nombre del alumno"
+            [(ngModel)] = "nombre" >
+        <input [(ngModel)] = "apellidos" type="text" name="apellidos" required class="form-control" placeholder="Ingresa los apellidos del alumno">
+        
+        <div>
+            <label for="genero">Selecciona tu genero</label>
+            <select name="genero" id="genero" required class="form-select" [(ngModel)] = "genero">
+                <option disabled selected>Selecciona una opción...</option>
+                <option value="HOMBRE">Hombre</option>
+                <option value="MUJER">Mujer</option>
+            </select>
+        </div>
+        <input type="submit" [value]="!isEditable ? 'Guardar' : 'Modificar'" class="btn btn-secondary" [disabled]="!formProfesores.valid">
+    </form>
+</div>
+
+<div class="mt-4">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Género</th>
+                <th>Eliminar</th>
+                <th>
+                    Editar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profesor of profesores">
+                <td> {{ profesor.nombre }} </td>
+                <td> {{ profesor.apellidos }} </td>
+                <td> {{ profesor.genero }} </td>
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarProfesores(profesor.id)">Eliminar</button>
+                </td>
+                <td>
+                    <button class="btn btn-warning" (click)="editable(profesor)">Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

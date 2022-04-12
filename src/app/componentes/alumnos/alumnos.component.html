@@ -1,0 +1,62 @@
+<div class="mt-4">
+    <h2>Administración de alumnos</h2>
+    <form #formAlumnos="ngForm" novalidate (ngSubmit)="saveOrUpdate()">
+        <input 
+            type="text" 
+            name="nombre" 
+            required 
+            class="form-control"
+            placeholder="Ingresa el nombre del alumno"
+            [(ngModel)] = "nombre" >
+        <input [(ngModel)] = "apellidos" type="text" name="apellidos" required class="form-control" placeholder="Ingresa los apellidos del alumno">
+        
+        <div>
+            <label for="genero">Selecciona tu genero</label>
+            <select name="genero" id="genero" required class="form-control" [(ngModel)] = "genero">
+                <option disabled selected>Selecciona una opción...</option>
+                <option value="HOMBRE">Hombre</option>
+                <option value="MUJER">Mujer</option>
+            </select>
+        </div>
+        <div>
+            <label for="fechaNacimiento">Selecciona tu fecha de nacimiento</label>
+            <input type="date" 
+                placeholder="Selecciona tu fecha de nacimiento" 
+                class="form-control" 
+                required 
+                name="fechaNacimiento"
+                id="fechaNacimiento" 
+                [(ngModel)] = "fechaNacimiento">
+        </div>
+
+        <input type="submit" [value]="!isEditable ? 'Guardar' : 'Modificar'" class="btn btn-secondary" [disabled]="!formAlumnos.valid">
+    </form>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Género</th>
+            <th>Fecha Nacimiento</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let alumno of alumnos">
+            <td> {{ alumno.nombre }} </td>
+            <td> {{ alumno.apellidos }} </td>
+            <td> {{ alumno.genero }} </td>
+            <td> {{ alumno.fechaNacimiento }} </td>
+            <td>
+                <button class="btn btn-danger" (click)="eliminarAlumno(alumno.id)">Eliminar</button>
+            </td>
+            <td>
+                <button class="btn btn-warning" (click)="editable(alumno)">Editar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

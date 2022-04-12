@@ -1,0 +1,75 @@
+<div class="mt-4">
+    <h2>Asignación de grados a los alumnos</h2>
+
+    <form #formGradoAlumnos="ngForm" novalidate (ngSubmit)="saveOrUpdate()">
+        <input 
+            type="text" 
+            name="nombre" 
+            required 
+            class="form-control"
+            placeholder="Ingresa el nombre de la sección"
+            [(ngModel)] = "seccion" >
+   
+        <div class="mt-3 mb-3">
+            <label for="grado">Selecciona el grado</label>
+            <select name="grado" id="grado" required class="form-select" [(ngModel)] = "grado_id">
+                <option value="0" disabled selected>Selecciona una opción...</option>
+                <option *ngFor="let grado of grados" [value]="grado.id">
+                    {{ grado.nombre }}
+                </option>
+            </select>        
+        </div>
+
+        <div class="mt-3 mb-3">
+            <label for="alumno">Selecciona el alumno que quieres agregar</label>
+            <select name="alumno" id="alumno" required class="form-select" [(ngModel)] = "alumno_id">
+                <option value="0" disabled selected>Selecciona una opción...</option>
+                <option *ngFor="let alumno of alumnos" [value]="alumno.id">
+                    Folio: {{ alumno.id }} -  {{ alumno.nombre }} {{ alumno.apellidos }}
+                </option>
+            </select>        
+        </div>
+        <input type="submit" [value]="!isEditable ? 'Guardar' : 'Modificar'" class="btn btn-secondary" [disabled]="!formGradoAlumnos.valid">
+    </form>
+</div>
+
+<div class="mt-4">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Seccion</th>
+                <th>Grado</th>
+                <th>Alumno</th>                
+                <th>
+                    Eliminar
+                </th>
+                <th>
+                    Editar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let grado of grado_alumno">
+                <td>
+                    {{ grado.id }}
+                </td>
+                <td>
+                    {{ grado.seccion }}
+                </td>                
+                <td>
+                    {{ grado.grado.nombre }}
+                </td>
+                <td>
+                    {{ grado.alumno.nombre }} {{ grado.alumno.apellidos }}
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarGradoAlumno(grado.id)">Eliminar</button>
+                </td>
+                <td>
+                    <button class="btn btn-warning" (click)="editable(grado)">Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
